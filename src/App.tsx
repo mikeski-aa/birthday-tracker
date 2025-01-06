@@ -1,35 +1,47 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [showAdd, setShowAdd] = useState<boolean>(false);
+
+  const handleAddClick = () => {
+    setShowAdd(!showAdd);
+  };
+
+  const handleAddBday = () => {};
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="mainContainer">
+        <div className="headerContainer">
+          <div className="leftHeader">
+            <h3>Birthday Tracker</h3>
+          </div>
+          <div className="rightHeader">Something</div>
+        </div>
+        <div className="birthdayHolder">map birthdays here</div>
+        <div className="addNewBday">
+          {showAdd ? (
+            <div className="newBdayForm">
+              <div className="nameInputHolder">
+                <label htmlFor="nameInput">Name</label>
+                <input type="text" id="nameInput" />
+              </div>
+              <div className="dateInputHolder">
+                <label htmlFor="dateInput">Date</label>
+                <input type="date" id="dateInput" />
+              </div>
+              <button onClick={handleAddBday}>Save</button>
+              <button onClick={handleAddClick}>Cancel</button>
+            </div>
+          ) : (
+            <button onClick={handleAddClick}>Add birthday</button>
+          )}
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
