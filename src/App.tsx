@@ -3,14 +3,14 @@ import "./App.css";
 
 export interface iBday {
   name: string;
-  birthday: Date;
+  birthday: string;
 }
 
 function App() {
   const [showAdd, setShowAdd] = useState<boolean>(false);
   const [birthdays, setBirthdays] = useState<iBday[]>([]);
   const [name, setName] = useState<string>("");
-  const [bday, setBday] = useState<Date>(new Date());
+  const [bday, setBday] = useState<string>("");
 
   const handleAddClick = () => {
     setShowAdd(!showAdd);
@@ -19,9 +19,7 @@ function App() {
   const handleAddBday = (e: SyntheticEvent) => {
     const target = e.target as HTMLDataElement;
 
-    const newDate = new Date(target.value);
-    console.log(newDate);
-    setBday(newDate);
+    setBday(target.value);
   };
 
   const handleNameInput = (e: SyntheticEvent) => {
@@ -43,7 +41,7 @@ function App() {
       setBirthdays(bdayCopy);
 
       setName("");
-      setBday(new Date());
+      setBday("");
     }
   };
 
@@ -56,7 +54,14 @@ function App() {
           </div>
           <div className="rightHeader">Something</div>
         </div>
-        <div className="birthdayHolder">map birthdays here</div>
+        <div className="birthdayHolder">
+          {birthdays.map((item, index) => (
+            <div className="birthdayItem" key={index}>
+              <div className="personName">{item.name}</div>
+              <div className="personBday">{item.birthday}</div>
+            </div>
+          ))}
+        </div>
         <div className="addNewBday">
           {showAdd ? (
             <div className="newBdayForm">
@@ -66,6 +71,7 @@ function App() {
                   type="text"
                   id="nameInput"
                   onChange={(e) => handleNameInput(e)}
+                  value={name}
                 />
               </div>
               <div className="dateInputHolder">
