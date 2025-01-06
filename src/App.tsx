@@ -1,15 +1,35 @@
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import "./App.css";
+
+export interface iBday {
+  name: string;
+  birthday: Date;
+}
 
 function App() {
   const [count, setCount] = useState(0);
   const [showAdd, setShowAdd] = useState<boolean>(false);
+  const [birthdays, setBirthdays] = useState<iBday[]>([]);
+  const [name, setName] = useState<string>("");
+  const [bday, setBday] = useState<Date>();
 
   const handleAddClick = () => {
     setShowAdd(!showAdd);
   };
 
-  const handleAddBday = () => {};
+  const handleAddBday = (e: SyntheticEvent) => {
+    const target = e.target as HTMLDataElement;
+
+    const newDate = new Date(target.value);
+    console.log(newDate);
+    setBday(newDate);
+  };
+
+  const handleNameInput = (e: SyntheticEvent) => {
+    const target = e.target as HTMLInputElement;
+
+    setName(target.value);
+  };
 
   return (
     <>
@@ -26,11 +46,19 @@ function App() {
             <div className="newBdayForm">
               <div className="nameInputHolder">
                 <label htmlFor="nameInput">Name</label>
-                <input type="text" id="nameInput" />
+                <input
+                  type="text"
+                  id="nameInput"
+                  onChange={(e) => handleNameInput(e)}
+                />
               </div>
               <div className="dateInputHolder">
                 <label htmlFor="dateInput">Date</label>
-                <input type="date" id="dateInput" />
+                <input
+                  type="date"
+                  id="dateInput"
+                  onChange={(e) => handleAddBday(e)}
+                />
               </div>
               <button onClick={handleAddBday}>Save</button>
               <button onClick={handleAddClick}>Cancel</button>
