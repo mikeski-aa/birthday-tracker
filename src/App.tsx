@@ -7,11 +7,10 @@ export interface iBday {
 }
 
 function App() {
-  const [count, setCount] = useState(0);
   const [showAdd, setShowAdd] = useState<boolean>(false);
   const [birthdays, setBirthdays] = useState<iBday[]>([]);
   const [name, setName] = useState<string>("");
-  const [bday, setBday] = useState<Date>();
+  const [bday, setBday] = useState<Date>(new Date());
 
   const handleAddClick = () => {
     setShowAdd(!showAdd);
@@ -29,6 +28,23 @@ function App() {
     const target = e.target as HTMLInputElement;
 
     setName(target.value);
+  };
+
+  const handleSave = () => {
+    if (bday && name) {
+      const newPerson: iBday = {
+        name: name,
+        birthday: bday,
+      };
+
+      const bdayCopy: iBday[] = [...birthdays];
+      bdayCopy.push(newPerson);
+
+      setBirthdays(bdayCopy);
+
+      setName("");
+      setBday(new Date());
+    }
   };
 
   return (
@@ -58,9 +74,10 @@ function App() {
                   type="date"
                   id="dateInput"
                   onChange={(e) => handleAddBday(e)}
+                  value={bday}
                 />
               </div>
-              <button onClick={handleAddBday}>Save</button>
+              <button onClick={handleSave}>Save</button>
               <button onClick={handleAddClick}>Cancel</button>
             </div>
           ) : (
