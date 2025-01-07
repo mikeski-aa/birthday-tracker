@@ -14,13 +14,11 @@ function calculateDays(input: string) {
     (convertedInput.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24);
 
   if (result < 0) {
-    result =
-      (currentDate.getTime() - convertedInput.getTime()) /
-      (1000 * 60 * 60 * 24);
+    result = 365 + result;
   }
 
   console.log(result);
-  return result.toFixed(0);
+  return Math.ceil(result);
 }
 
 function App() {
