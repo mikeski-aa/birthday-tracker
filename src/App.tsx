@@ -6,6 +6,23 @@ export interface iBday {
   birthday: string;
 }
 
+function calculateDays(input: string) {
+  const currentDate = new Date();
+  const convertedInput = new Date(input);
+
+  let result =
+    (convertedInput.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24);
+
+  if (result < 0) {
+    result =
+      (currentDate.getTime() - convertedInput.getTime()) /
+      (1000 * 60 * 60 * 24);
+  }
+
+  console.log(result);
+  return result.toFixed(0);
+}
+
 function App() {
   const [showAdd, setShowAdd] = useState<boolean>(false);
   const [birthdays, setBirthdays] = useState<iBday[]>([]);
@@ -59,6 +76,7 @@ function App() {
             <div className="birthdayItem" key={index}>
               <div className="personName">{item.name}</div>
               <div className="personBday">{item.birthday}</div>
+              <div className="personBday">{calculateDays(item.birthday)}</div>
             </div>
           ))}
         </div>
