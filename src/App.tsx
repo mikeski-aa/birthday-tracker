@@ -1,5 +1,6 @@
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import "./App.css";
+import { DayPicker } from "react-day-picker";
 
 export interface iBday {
   name: string;
@@ -78,6 +79,13 @@ function App() {
             </div>
           ))}
         </div>
+        <DayPicker
+          mode="single"
+          startMonth={new Date(2024, 0)}
+          endMonth={new Date(2024, 11)}
+          showOutsideDays
+          fixedWeeks
+        />
         <div className="addNewBday">
           {showAdd ? (
             <div className="newBdayForm">
