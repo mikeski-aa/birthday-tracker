@@ -1,6 +1,5 @@
 import { SyntheticEvent, useState } from "react";
 import "./App.css";
-import flatpickr from "flatpickr";
 
 export interface iBday {
   name: string;
