@@ -66,7 +66,7 @@ function App() {
       <div className="mainContainer">
         <div className="headerContainer">
           <div className="leftHeader">
-            <h3>Birthday Tracker</h3>
+            <h3>Birthday Trackedr</h3>
           </div>
           <div className="rightHeader">Something</div>
         </div>
